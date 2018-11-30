@@ -13,6 +13,9 @@ ui <- fluidPage(
   
   hr(),
   
+  textInput("satker", "Satker"),
+  #verbatimTextOutput("value"),
+  
   selectInput(inputId = "type",label = "Jenis File",
               choices = list("PDF" = 1,"Excel" = 2),
               selected = 1
@@ -33,8 +36,8 @@ ui <- fluidPage(
                    hr(),
                    #actionButton("grt2", "Lihat file yang telah diunggah"),
                    tags$br(),
-                   tags$br()#,
-                   #verbatimTextOutput("print_action2")
+                   tags$br(),
+                   verbatimTextOutput("print_action2")
   ),
   mainPanel(textOutput("count"))
 )
@@ -44,6 +47,8 @@ server <- function(input, output) {
     rbindlist(lapply(input$file_pdf$datapath, fread),
               use.names = TRUE, fill = TRUE)
   })
+  
+  output$value <- renderText({input$satker})
   
   output$count <- renderText(nrow(myfiles))
   
@@ -190,14 +195,14 @@ server <- function(input, output) {
   
   pdftocsv <- observeEvent(input$grt1, ignoreInit = TRUE, {
     
-    satker <- 101
+    #satker <- input$satker
     #define path and name for file csv
-    filename <- paste('http://10.2.3.42/xampp/htdocs/telaah/web/uploads',satker,'/',input$file_pdf$name, '.csv')
+    filename <- paste('http://10.2.3.42/xampp/htdocs/telaah/web/uploads',input$satker,'/',input$file_pdf$name, '.csv')
     filename <- gsub(" ", "", filename)
     filename <- gsub(".pdf", "", filename)
     
     write.csv(lkdf(), filename)
-    showModal(modalDialog("Data Berhasil Disimpan. Silakan ulangi langkah input untuk memasukkan file lainnya"))
+    showModal(modalDialog("Data Berhasil Disimpan."))
   })
   
   xlstocsv <- observeEvent(input$grt2, ignoreInit = TRUE, {
@@ -209,14 +214,14 @@ server <- function(input, output) {
     #change value na with 0
     df[is.na(df)] <- 0
     
-    satker <- 101
+    #satker <- 101
     #define path and name for file csv
-    filename <- paste('C:/xampp/htdocs/telaah/R/',satker,'/',input$file_xls$name, '.csv')
+    filename <- paste('http://10.2.3.42/xampp/htdocs/telaah/web/uploads',input$satker,'/',input$file_xls$name, '.csv')
     filename <- gsub(" ", "", filename)
     filename <- gsub(".xlsx", "", filename)
     
     write.csv(df, filename)
-    showModal(modalDialog("Data Berhasil Disimpan. Silakan ulangi langkah input untuk memasukkan file lainnya"))
+    showModal(modalDialog("Data Berhasil Disimpan."))
   })
 }
 
