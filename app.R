@@ -197,7 +197,7 @@ server <- function(input, output) {
     
     #satker <- input$satker
     #define path and name for file csv
-    filename <- paste('C:/xampp/htdocs/telaah/R/',input$satker,'/',input$file_pdf$name, '.csv')
+    filename <- paste('http://10.2.3.42:8080/telaah/R/',input$satker,'/',input$file_pdf$name, '.csv')
     filename <- gsub(" ", "", filename)
     filename <- gsub(".pdf", "", filename)
     
@@ -216,7 +216,7 @@ server <- function(input, output) {
     
     #satker <- 101
     #define path and name for file csv
-    filename <- paste('C:/xampp/htdocs/telaah/R/',input$satker,'/',input$file_xls$name, '.csv')
+    filename <- paste('http://10.2.3.42:8080/telaah/R/',input$satker,'/',input$file_xls$name, '.csv')
     filename <- gsub(" ", "", filename)
     filename <- gsub(".xlsx", "", filename)
     
