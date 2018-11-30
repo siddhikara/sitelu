@@ -21,7 +21,7 @@ ui <- fluidPage(
   conditionalPanel(condition="input.type==1",
                    fileInput('file_pdf', 'Masukkan File PDF', accept = c('.pdf'), multiple = TRUE),
                    hr(),
-                   actionButton("grt1", "Lihat file yang telah diunggah"),
+                   #actionButton("grt1", "Lihat file yang telah diunggah"),
                    tags$br(),
                    tags$br(),
                    verbatimTextOutput("print_action1")#,
@@ -31,7 +31,7 @@ ui <- fluidPage(
   conditionalPanel(condition="input.type==2",
                    fileInput('file_xls', 'Masukkan File Excel', accept = c('.xls','.xlsx'), multiple = TRUE),
                    hr(),
-                   actionButton("grt2", "Lihat file yang telah diunggah"),
+                   #actionButton("grt2", "Lihat file yang telah diunggah"),
                    tags$br(),
                    tags$br()#,
                    #verbatimTextOutput("print_action2")
